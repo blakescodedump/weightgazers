@@ -1,0 +1,101 @@
+html {
+    text-align:center;
+    font-family:monospace;
+}
+
+hr{
+   color: white;
+   width: 90%;
+}
+
+h1 {
+    font-size: 58px;
+    margin-bottom: 0%;
+}
+
+.logo {
+    color:magenta;
+}
+
+h2 {
+    font-size: 25px;
+}
+
+h3 {
+    font-size: 20px;
+    margin-bottom: 0.5%;
+}
+
+body {
+    background-color: transparent;
+}
+
+p {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+a {
+    color:rgb(247, 11, 215)
+}
+
+iframe {
+    width: 340px;
+    height: 340px;
+    margin-left: 18px;
+    margin-right: 18px;
+}
+
+input {
+    background-color: rgba(155, 9, 155, 0.185);
+    border-color: rgb(155, 16, 136);
+    color: rgb(255, 132, 239);
+    width: 234px;
+    height: 32px;
+    font-weight: bold;
+    font-family: monospace;
+    font-size:25px;
+}
+
+.form-control{
+    background-color: rgba(155, 9, 155, 0.185);
+    border-color: rgb(155, 16, 136);
+    color: rgb(255, 132, 239);
+    width: 180px;
+    height: 48px;
+    font-weight: bold;
+    font-family: monospace;
+    font-size:25px;
+    margin-top:12px;
+    margin-bottom:12px;
+}
+
+select {
+    background-color: rgba(155, 9, 155, 0.185);
+    border-color: rgb(155, 16, 136);
+    color: rgb(255, 132, 239);
+    width: 64px;
+    height: 36px;
+    font-weight: bold;
+    font-family: monospace;
+}
+
+button {
+    background-color: rgba(155, 9, 155, 0.185);
+    border-color: rgb(155, 16, 136);
+    color: rgb(255, 132, 239);
+    width: 360px;
+    height: 64px;
+    font-weight: bold;
+    font-family: monospace;
+    font-size:40px;
+}
+
+#bg {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index:-1;
+  }

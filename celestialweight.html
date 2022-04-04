@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<title>Celestial Body Calculator</title>
+<!--Link to CSS-->
+<link rel="stylesheet" href="celestialweight.css"></link> 
+<!--Background Video-->
+<video autoplay muted loop id="bg">
+  <source src="celwbg.mp4" type="video/mp4">
+</video>
+<!--Title-->
+<header>
+<h1><b class="logo">WEIGHTGAZERS:</b>WeightCalculator</h1>
+<h3>Find out your weight on other celestial bodies, and vice versa!</h3>
+<br>
+<hr></hr><!--Line-->
+</header>
+<body>
+  <div class="form-group">
+    <select class="form-control" onchange="update(this)" name="" id="bodies"></select> <!--List that is updated with the "bodies" array in the js file.-->
+  </div>
+  <p><iframe src="https://solarsystem.nasa.gov/gltf_embed/2392" id="img1"></iframe> <iframe src="https://solarsystem.nasa.gov/gltf_embed/2366" id="img2"></iframe></p>
+  <h2 id="iname"></h2>
+
+  <p>Weight: <input  id="weight"></input> <!--Input Weight Here-->
+  <!--Units Dropdown-->
+  <select units id="units">
+    <option value="kg">kg</option>
+    <option value="lbs">lbs</option>
+  </select>
+ </p>
+ <button onclick="math(this)">Ignition!</button></p><!--Start Button-->
+</div>
+  <br>
+  <h2 id="output"></h2>
+</body>
+<br>
+<hr></hr><!--Line-->
+<br>
+<footer>
+  <p>Background image prodivded by <a href="https://www.videezy.com/">videezy.com</a>.</p>
+  <p>3D Models and Pictures courtesy of <a href="https://www.nasa.gov/">nasa.gov</a> and <a href="https://en.wikipedia.org/">en.wikipedia.org</a>.</p>
+</footer>
+</html>
+<script type="text/javascript" src="celestialweight.js"></script>
+
