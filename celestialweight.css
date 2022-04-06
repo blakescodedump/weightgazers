@@ -11,6 +11,7 @@ hr{
 h1 {
     font-size: 58px;
     margin-bottom: 0%;
+    color: white;
 }
 
 .logo {
@@ -19,11 +20,13 @@ h1 {
 
 h2 {
     font-size: 25px;
+    color: white;
 }
 
 h3 {
     font-size: 20px;
     margin-bottom: 0.5%;
+    color: white;
 }
 
 body {
@@ -33,6 +36,7 @@ body {
 p {
     font-weight: bold;
     font-size: 20px;
+    color: white;
 }
 
 a {

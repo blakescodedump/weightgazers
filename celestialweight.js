@@ -1,103 +1,98 @@
 //Earth/Moon Weight Comparison Tool (JS Edition)
 //More celestial bodies on the way.
-var ibodies;
-var obodies;
-var step = 0;
-var idx1;
-var idx2;
-var bodies = ["Pick One","Mercury", "Venus", "Earth", "Moon", "Mars", "Phobos", "Deimos", "Ceres", "Jupiter", "Ganymede", "Europa", "Callisto", "Io", "Saturn", "Titan", "Enceladus", "Uranus", "Neptune", "Triton", "Pluto", "Charon", "Nix", "Hydra", "Styx", "Kerberos", "Makemake", "Haumea", "Eris", "Sedna", "Sun"];
-var gravity = [0, 3.70, 8.87, 9.81, 1.622, 3.71, 0.0057, 0.003, 0.28, 24.79, 1.428, 1.316, 1.23603, 1.719, 10.44, 1.354, 0.113, 8.87, 11.15, 0.782, 0.620, 0.288, 0.000163, 0.051, 0.00080086, 0.00305037, 0.5, 0.401, 0.82, 0.5, 274];
-var pics = [0, 2369, 2342, 2392, 2366, 2372, 2358, 2434, 2400, 2375, 2385, 2388, 2402, 2379, 2355, 2349, 2391, 2344, 2364, 2346, 2357, 2399, 0, 0, 0, 0, 2374, 2384, 2390, 0, 2352];
-//var picslot;
+var ibodies; //Stores name of input body.
+var obodies; //Stores name of output body.
+var step = 0; //Progress tracker.
+var idx1; //Index storage for input.
+var idx2; //Index storage for output.
+//Names of Bodies Array:
+var bodies = ["Pick One","Mercury", "Venus", "Earth", "Moon", "Mars", "Phobos", "Deimos", "Ceres", "Jupiter", "Ganymede", "Europa", "Callisto", "Io", "Saturn", "Titan", "Enceladus", "Tethys", "Rhea", "Dione", "Iapetus", "Mimas", "Hyperion", "Uranus", "Ariel", "Umbriel", "Oberon", "Titania", "Miranda", "Neptune", "Triton", "Pluto", "Charon", "Nix", "Hydra", "Styx", "Kerberos", "Makemake", "Haumea", "Eris", "Sedna", "Sun", "Proxima Centauri", "Proxima B", "UY Scuti", "Sagittarius A*"];
+//Gravity of Bodies Array:
+var gravity = [0, 3.70, 8.87, 9.81, 1.622, 3.71, 0.0057, 0.003, 0.28, 24.79, 1.428, 1.316, 1.23603, 1.719, 10.44, 1.353, 0.113, 0.145, 0.264, 0.232, 0.223, 0.064, 0.02, 8.87, 0.249, 0.2, 0.354, 0.367, 0.077, 11.15, 0.782, 0.620, 0.288, 0.000163, 0.051, 0.00080086, 0.00305037, 0.5, 0.401, 0.82, 0.5, 274, 0.052, 8.50, 0.003162, 3540000];
+//Model IDs for Each Body:
+var pics = [0, 2369, 2342, 2392, 2366, 2372, 2358, 2434, 2400, 2375, 2385, 2388, 2402, 2379, 2355, 2349, 2391, 2351, 2354, 2396, 2381, 2368, 2382, 2344, 2406, 2345, 2362, 2348, 2367, 2364, 2346, 2357, 2399, 0, 0, 0, 0, 2374, 2384, 2390, 0, 2352, 0, 0, 0, 0];
+
+//Calls Dropdown Setup Function upon launch.
+setupDropdown()
 
 //Sets up choices for the input dropdown.
 function setupDropdown(){
-    var option = "";
+    var option = ""; //Defines variable option for display.
+    //Adds body from the name array for each increment, filling the dropdown list until it reaches the end of the array.
     for (var i=0; i<bodies.length; i++){
         option += '<option value="'+ bodies[i] +'">' + bodies[i] + "</option>";
     }
-    document.getElementById("bodies").innerHTML = option;
+    document.getElementById("bodies").innerHTML = option; //Displays all options grabbed by the for loop.
 }
 
-//Displays console.log contents to HTML.
-(function displayLog() {
-    var old = console.log;
-    var logger = document.getElementById('log');
-    console.log = function (message) {
-        if (typeof message == 'object') {
-            logger.innerHTML += (JSON && JSON.stringify ? JSON.stringify(message) : message) + '<br />';
-        } else {
-            logger.innerHTML += message + '<br />';
-        }
-    }
-})();
-
+//Checks if the body has a model or a picture.
 function modelorpic () {
-    if (step == 0){
-        idx1 = bodies.indexOf(ibodies);
-        var model = pics[idx1];
+    //Step 0 is input, Step 1 is output.
+    if (step == 0){ //For INPUT body.
+        idx1 = bodies.indexOf(ibodies); //Gets index from chosen input body.
+        var model = pics[idx1]; // Uses index to grab model ID.
         if (model == 0){
-            var picslot = (ibodies+".jpg");
-            document.getElementById("img1").src = picslot;
+            var picslot = (ibodies+".jpg"); //Sets iframe to show image if no model exists.
+            document.getElementById("img1").src = picslot; //Displays image.
         } else {
-            var picslot = ("https://solarsystem.nasa.gov/gltf_embed/"+model);
-            document.getElementById("img1").src = picslot;
+            var picslot = ("https://solarsystem.nasa.gov/gltf_embed/"+model); //Sets iframe to show model if it exists.
+            document.getElementById("img1").src = picslot; //Displays model.
         }
-    } else if (step == 1) {
-        idx2 = bodies.indexOf(obodies);
-        var model = pics[idx2];
+    } else if (step == 1) { //For OUTPUT body.
+        idx2 = bodies.indexOf(obodies); //Gets index from chosen input body.
+        var model = pics[idx2]; // Uses index to grab model ID.
         if (model == 0){
-            var picslot2 = (obodies+".jpg");
-            document.getElementById("img2").src = picslot2;
+            var picslot2 = (obodies+".jpg"); //Sets iframe to show image if no model exists.
+            document.getElementById("img2").src = picslot2; //Displays image.
         } else {
-            var picslot2 = ("https://solarsystem.nasa.gov/gltf_embed/"+model);
-            document.getElementById("img2").src = picslot2;
+            var picslot2 = ("https://solarsystem.nasa.gov/gltf_embed/"+model); //Sets iframe to show model if it exists.
+            document.getElementById("img2").src = picslot2; //Displays model.
         }
     }
         
 }
 
-setupDropdown()
+//Gets names when you select something in the body select dropdown.
 function update(bodies){
+    //Checks for steps completed, to prevent repeating upon input.
     if (step == 0){
-        ibodies = document.getElementById("bodies").value;
-        modelorpic();
-        document.getElementById("iname").innerHTML = (ibodies+" and ");
-        //var newSrc = pics.options[pics.selectedIndex].value;
-        
-        //console.log(ibodies+" and ");
-        step++;
-        setupDropdown()
+        ibodies = document.getElementById("bodies").value;//Gets input for Body 1 from dropdown and stores it.
+        modelorpic(); //Check for img/model
+        document.getElementById("iname").innerHTML = (ibodies+" and "); //Display Name
+        step++; //Increases step so the next time a drop down option is chosen, it will not do this again.
+        setupDropdown() //Sets up the dropdown again.
     } else if (step == 1){
-        obodies = document.getElementById("bodies").value;
-        modelorpic();
-        document.getElementById("iname").innerHTML = (ibodies+" and "+obodies);
-
-        //console.log(obodies);
-        step++;
+        obodies = document.getElementById("bodies").value;//Gets input for Body 2 from dropdown and stores it.
+        modelorpic(); //Check for img/model
+        document.getElementById("iname").innerHTML = (ibodies+" and "+obodies); //Display Name
+        step++; //Increases step so the next time a drop down option is chosen, it will not do this again.
     }
 }
 
 
+//When ignition button is pressed, it will perform the math problem and display output.
 function math(){
     if (step == 2){
-        weight = document.getElementById("weight").value;
-        unit = document.getElementById("units").value;
-        idx1 = bodies.indexOf(ibodies);
-        var igrav = gravity[idx1];
-        idx2 = bodies.indexOf(obodies);
+        weight = document.getElementById("weight").value; //Grabs the weight from the input box.
+        unit = document.getElementById("units").value; //Grabs the unit chosen from the unit dropdown box.
+        idx1 = bodies.indexOf(ibodies); //Gets the index of the input body selected.
+        var igrav = gravity[idx1]; //Uses found index to find gravity of said body, and stores it in a variable.
+        idx2 = bodies.indexOf(obodies); //Same thing for next 2 lines, but for the output body this time.
         var ograv = gravity[idx2];
         //Formula
         var firststep = weight / igrav; //Divides input weight by input's gravity.
         var output = firststep * ograv; //Multiplies previous answer by output's gravity.
-        step++
+        step++//Increases to Step 3 (Can't redo the previous code).
+        //If either body is the Moon, changes it so it displays "The Moon" rather than "Moon".
         if (obodies == "Moon"){
             obodies = "The Moon";
+        } else if (ibodies == "Moon"){
+            ibodies = "The Moon";
         }
         if (ibodies == obodies){
-            document.getElementById("output").innerHTML = ("May I ask you why in your right mind would you pick TWO of the SAME PLANET?");
+            document.getElementById("output").innerHTML = ("May I ask you why in your right mind would you pick TWO of the SAME BODY?"); //This outputs when you pick two of the same body.
         } else {
-            document.getElementById("output").innerHTML = ("If you weigh "+weight+" "+unit+" on "+ibodies+", you'd weigh "+output+" "+unit+" on "+obodies+".");
+            document.getElementById("output").innerHTML = ("If you weigh "+weight+" "+unit+" on "+ibodies+", you'd weigh "+output+" "+unit+" on "+obodies+"."); //Displays output.
         }
     }
 }
